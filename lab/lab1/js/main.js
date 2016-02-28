@@ -100,8 +100,23 @@ the week was the most common for garbage removal?
 
 var dataset = 'https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson';
 
+var sharedWeight = 2;
 var myStyle = function(feature) {
-  return {};
+  if(feature.properties.COLLDAY == "MON"){
+    return {color:"#D46A6A",weight:sharedWeight};
+  }
+  else if(feature.properties.COLLDAY == "TUE"){
+    return {color:"#F7830C",weight:sharedWeight};
+  }
+  else if(feature.properties.COLLDAY == "WED"){
+    return {color:"#F3F60C",weight:sharedWeight};
+  }
+  else if(feature.properties.COLLDAY == "THU"){
+    return {color:"#08A868",weight:sharedWeight};
+  }
+  else if(feature.properties.COLLDAY == "FRI"){
+    return {color:"#1B3BA7",weight:sharedWeight};
+  }
 };
 
 var eachFeature = function(feature, layer) {
@@ -111,13 +126,50 @@ var eachFeature = function(feature, layer) {
     Check out feature.properties to see some useful data about the feature that
     you can use in your application.
     ===================== */
+    var dayString = DayStringFromThreeLetters(feature.properties.COLLDAY);
+    $('.day-of-week').text(dayString);
     console.log(feature);
     showResults();
+
+    // Task 6 fitbounds
+    var fitBoundsOptions = { padding: [50, 50] };  // An options object
+    map.fitBounds(this.getBounds(), fitBoundsOptions);
   });
 };
 
+var DayStringFromThreeLetters = function(shortName){
+  s = '';
+  switch (shortName) {
+    case 'MON':
+      s='Monday';
+    break;
+    case 'TUE':
+      s='Tuesday';
+    break;
+    case 'WED':
+      s='Wednesday';
+    break;
+    case 'THU':
+      s='Thursday';
+    break;
+    case 'FRI':
+      s='Friday';
+    break;
+    default:
+    break;
+  }
+  return s;
+};
+
 var myFilter = function(feature) {
-  return true;
+  var day = feature.properties.COLLDAY;
+  if(day!="MON" && day!="TUE" && day!="WED" && day!= "THU" && day!="FRI")
+  {
+    return false;
+  }
+  else {
+    {return true;}
+  }
 };
 
 $(document).ready(function() {

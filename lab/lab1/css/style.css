@@ -31,4 +31,31 @@ p.main {
   position: absolute;
   background-color: #fff;
   z-index: 2000;
+  left: 500px;
+  width: 400px;
+}
+
+.legendTable{
+  border-spacing: 10px;
+  margin: 10px;
+  border-collapse: inherit;
+}
+.legendBlock{
+  width: 20px;
+  height: 20px;
+}
+#legend-MON{
+  background-color: #D46A6A;
+}
+#legend-TUE{
+  background-color: #F7830C;
+}
+#legend-WED{
+  background-color: #F3F60C;
+}
+#legend-THU{
+  background-color: #08A868;
+}
+#legend-FRI{
+  background-color: #1B3BA7;
 }
